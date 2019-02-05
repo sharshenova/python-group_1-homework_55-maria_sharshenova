@@ -12,72 +12,48 @@ const availableIngredients = [
   {name: 'bacon', price: 20, label: 'Бекон'}
 ];
 
+const basePrice = 20;
 
 class App extends Component {
   state = {
     ingredients: [
-      {name: 'salad', count: 1, total: 0, disable: true, label: 'Салат'},
-      {name: 'cheese', count: 1, total: 0, disable: true, label: 'Сыр'},
-      {name: 'meat', count: 2, total: 0, disable: true, label: 'Мясо'},
-      {name: 'bacon', count: 1, total: 0, disable: true, label: 'Бекон'}
+      {name: 'salad', count: 0, total: 0, disable: true, label: 'Салат'},
+      {name: 'cheese', count: 0, total: 0, disable: true, label: 'Сыр'},
+      {name: 'meat', count: 0, total: 0, disable: true, label: 'Мясо'},
+      {name: 'bacon', count: 0, total: 0, disable: true, label: 'Бекон'}
     ],
-    totalPrice: 10,
+    totalPrice: basePrice
   };
 
 
   addIngredient = (name) => {
-      // скопировать объект "ингредиент" (находим по ключу)
-      let ingredient = {...this.state.ingredients[name]};
-
-      // find - метод массива, который работает аналогично findIndex,
-      // но находит не индекс элемента в массиве,
-      // а возвращает сам элемент.
-      let price = availableIngredients.find(item => item.name === name).price;
-
-      // поменять свойства в копии ингредиента
-      ingredient.count += 1;
-      ingredient.total = ingredient.count * price;
-
-
-      // скопипровать объект "ингредиенты"
-      let ingredients = {...this.state.ingredients};
-
-      // поменять ингредиент в копии объекта "ингредиенты"
-      ingredients[name] = ingredient;
-
-
-      // скопировать состояние (state) компонента App.js
-      let state = {...this.state};
-
-      // поменять объект "игредиенты" в копии состояния (state)
-      state.ingredients = ingredients;
-
-      // задать новый state с перерисовкой компонентов на странице
-      this.setState(state);
+    this.updateIngredient(name, 1);
   };
 
   removeIngredient = (name) => {
-      // всё то же самое, что и в addIngredient
-      // только количество уменьшается на 1, а не увеличивается
-      // и есть проверка, что нельзя уменьшить количество ингредиента меньше 0
-
-      let ingredient = {...this.state.ingredients[name]};
-
-      let price = availableIngredients.find(item => item.name === name).price;
-
-      if (ingredient.count > 0) {
-          ingredient.count -= 1;
-      }
-      ingredient.total = ingredient.count * price;
-
-      let ingredients = {...this.state.ingredients};
-      ingredients[name] = ingredient;
-
-      let state = {...this.state};
-      state.ingredients = ingredients;
-
-      this.setState(state);
+    this.updateIngredient(name, -1);
   };
+
+  updateIngredient = (name, modifier) => {
+    // find - метод массива, который работает аналогично findIndex,
+    // но находит не индекс элемента в массиве,
+    // а возвращает сам элемент.
+    let price = availableIngredients.find(item => item.name === name).price;
+
+    // скопировать состояние (state) компонента App.js
+    let state = {...this.state};
+
+    let ingredient = state.ingredients.find(item => item.name === name);
+
+    ingredient.count += modifier;
+    ingredient.disable = ingredient.count < 1;
+    ingredient.total = ingredient.count * price;
+
+    state.totalPrice = basePrice + state.ingredients.reduce((sum, item) => sum + item.total, 0);
+
+    // задать новый state с перерисовкой компонентов на странице
+    this.setState(state);
+  }
 
 
 render() {

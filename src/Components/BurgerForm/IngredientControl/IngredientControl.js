@@ -8,7 +8,7 @@ const IngredientControl = (props) => {
         	<div className='Label float-left'>{props.label}</div>
         	<div className='float-right'>
         		<button disabled={props.disable} className="btn btn-secondary" onClick={props.removeIngredient}>Less</button>
-        		<button className='btn btn-primary' onClick={props.addIngredient}>More</button>   
+        		<button className='btn btn-primary ml-2' onClick={props.addIngredient}>More</button>   
         	</div>
         </div>
        )

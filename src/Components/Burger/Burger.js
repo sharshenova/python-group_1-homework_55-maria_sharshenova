@@ -24,10 +24,10 @@ function Burger(props) {
   // и добавлять все новые элементы в один и тот же массив ingredients.
   let ingredients = [];
 
-  for (let i = 0; i < salad.count; i++) ingredients.push(<Salad/>);
-  for (let i = 0; i < meat.count; i++) ingredients.push(<Meat/>);
-  for (let i = 0; i < cheese.count; i++) ingredients.push(<Cheese/>);
-  for (let i = 0; i < bacon.count; i++) ingredients.push(<Bacon/>);
+  for (let i = 0; i < salad.count; i++) ingredients.push(<Salad key={'salad' + i}/>);
+  for (let i = 0; i < meat.count; i++) ingredients.push(<Meat key={'meat' + i}/>);
+  for (let i = 0; i < cheese.count; i++) ingredients.push(<Cheese key={'cheese' + i}/>);
+  for (let i = 0; i < bacon.count; i++) ingredients.push(<Bacon key={'bacon' + i}/>);
 
   // возвращаем разметку с заданными компоненами бургера:
   // <Salad/>, <Meat/>, <Cheese/>, <Bacon/> в нужном количестве

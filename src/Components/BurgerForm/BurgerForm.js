@@ -13,7 +13,7 @@ const BurgerForm = (props) => {
 			<div>
 				{props.ingredients.map(item =>
 					<IngredientControl
-						name={item.name}
+						key={item.name}
 						label={item.label}
 						addIngredient={() => props.addIngredient(item.name)}
 						removeIngredient={() => props.removeIngredient(item.name)} 
