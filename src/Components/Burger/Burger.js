@@ -7,7 +7,16 @@ import Salad from './Salad/Salad';
 function Burger(props) {
   // распаковка ключей props.ingredients в 4 переменных: salad, meat, cheese, bacon
   // props.ingredients приходит из state.ingredients компонента App.js
-  const {salad, meat, cheese, bacon} = props.ingredients;
+  //const {salad, meat, cheese, bacon} = props.ingredients;
+
+  const salad = props.ingredients[0];
+  console.log(salad)
+  const meat = props.ingredients[1];
+  console.log(meat)
+  const cheese = props.ingredients[2];
+  console.log(cheese)
+  const bacon = props.ingredients[3];
+  console.log(bacon)
 
   // создаём массивы из компонентов Salad, Meat, Cheese и Bacon,
   // используя количество, указанное в свойстве count каждого ингредиента.
@@ -16,11 +25,8 @@ function Burger(props) {
   let ingredients = [];
 
   for (let i = 0; i < salad.count; i++) ingredients.push(<Salad/>);
-  let meats = [];
   for (let i = 0; i < meat.count; i++) ingredients.push(<Meat/>);
-  let cheeses = [];
   for (let i = 0; i < cheese.count; i++) ingredients.push(<Cheese/>);
-  let bacons = [];
   for (let i = 0; i < bacon.count; i++) ingredients.push(<Bacon/>);
 
   // возвращаем разметку с заданными компоненами бургера:
@@ -36,3 +42,4 @@ function Burger(props) {
 };
 
 export default Burger;
+

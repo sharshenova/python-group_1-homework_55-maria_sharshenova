@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
 import Burger from './Components/Burger/Burger';
+import BurgerForm from './Components/BurgerForm/BurgerForm';
 
 
-const availableIngredients = {
-  salad: {price: 5, label: 'Салат'},
-  cheese: {price: 20, label: 'Сыр'},
-  meat: {price: 30, label: 'Мясо'},
-  bacon: {price: 20, label: 'Bacon'}
-};
+
+const availableIngredients = [
+  {name: 'salad', price: 5, label: 'Салат'},
+  {name: 'cheese', price: 20, label: 'Сыр'},
+  {name: 'meat', price: 30, label: 'Мясо'},
+  {name: 'bacon', price: 20, label: 'Бекон'}
+];
 
 
 class App extends Component {
   state = {
-    ingredients: {
-      salad: {count: 1, total: 0},
-      cheese: {count: 2, total: 0},
-      meat: {count: 2, total: 0},
-      bacon: {count: 1, total: 0}
-    }
+    ingredients: [
+      {name: 'salad', count: 1, total: 0, disable: true, label: 'Салат'},
+      {name: 'cheese', count: 1, total: 0, disable: true, label: 'Сыр'},
+      {name: 'meat', count: 2, total: 0, disable: true, label: 'Мясо'},
+      {name: 'bacon', count: 1, total: 0, disable: true, label: 'Бекон'}
+    ],
+    totalPrice: 10,
   };
 
 
@@ -26,9 +29,14 @@ class App extends Component {
       // скопировать объект "ингредиент" (находим по ключу)
       let ingredient = {...this.state.ingredients[name]};
 
+      // find - метод массива, который работает аналогично findIndex,
+      // но находит не индекс элемента в массиве,
+      // а возвращает сам элемент.
+      let price = availableIngredients.find(item => item.name === name).price;
+
       // поменять свойства в копии ингредиента
       ingredient.count += 1;
-      ingredient.total = ingredient.count * availableIngredients[name].price;
+      ingredient.total = ingredient.count * price;
 
 
       // скопипровать объект "ингредиенты"
@@ -54,10 +62,13 @@ class App extends Component {
       // и есть проверка, что нельзя уменьшить количество ингредиента меньше 0
 
       let ingredient = {...this.state.ingredients[name]};
+
+      let price = availableIngredients.find(item => item.name === name).price;
+
       if (ingredient.count > 0) {
           ingredient.count -= 1;
       }
-      ingredient.total = ingredient.count * availableIngredients[name].price;
+      ingredient.total = ingredient.count * price;
 
       let ingredients = {...this.state.ingredients};
       ingredients[name] = ingredient;
@@ -69,11 +80,12 @@ class App extends Component {
   };
 
 
-
 render() {
         return (
             <div className="App">
                 <Burger ingredients={this.state.ingredients}/>
+                <BurgerForm removeIngredient={this.removeIngredient} addIngredient={this.addIngredient} totalPrice={this.state.totalPrice} ingredients={this.state.ingredients} />
+          
                 {/* здесь вывести панель с общей ценой */}
                     {/* для подсчёта цены можно добавить метод в App.js */}
                     {/* и вызвать его в фигурных скобках в JSX, */}
