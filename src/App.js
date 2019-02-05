@@ -21,6 +21,55 @@ class App extends Component {
     }
   };
 
+
+  addIngredient = (name) => {
+      // скопировать объект "ингредиент" (находим по ключу)
+      let ingredient = {...this.state.ingredients[name]};
+
+      // поменять свойства в копии ингредиента
+      ingredient.count += 1;
+      ingredient.total = ingredient.count * availableIngredients[name].price;
+
+
+      // скопипровать объект "ингредиенты"
+      let ingredients = {...this.state.ingredients};
+
+      // поменять ингредиент в копии объекта "ингредиенты"
+      ingredients[name] = ingredient;
+
+
+      // скопировать состояние (state) компонента App.js
+      let state = {...this.state};
+
+      // поменять объект "игредиенты" в копии состояния (state)
+      state.ingredients = ingredients;
+
+      // задать новый state с перерисовкой компонентов на странице
+      this.setState(state);
+  };
+
+  removeIngredient = (name) => {
+      // всё то же самое, что и в addIngredient
+      // только количество уменьшается на 1, а не увеличивается
+      // и есть проверка, что нельзя уменьшить количество ингредиента меньше 0
+
+      let ingredient = {...this.state.ingredients[name]};
+      if (ingredient.count > 0) {
+          ingredient.count -= 1;
+      }
+      ingredient.total = ingredient.count * availableIngredients[name].price;
+
+      let ingredients = {...this.state.ingredients};
+      ingredients[name] = ingredient;
+
+      let state = {...this.state};
+      state.ingredients = ingredients;
+
+      this.setState(state);
+  };
+
+
+
 render() {
         return (
             <div className="App">
