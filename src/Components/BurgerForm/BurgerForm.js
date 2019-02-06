@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import IngredientControl from './IngredientControl/IngredientControl';
 import './BurgerForm.css';
 
@@ -7,6 +7,7 @@ import './BurgerForm.css';
 
 const BurgerForm = (props) => {
 
+
 	return (
 		<div className='BurgerForm'>
 			<p className='price'>Current Price: {props.totalPrice + ' $'}</p>
@@ -14,7 +15,7 @@ const BurgerForm = (props) => {
 				{props.ingredients.map(item =>
 					<IngredientControl
 						key={item.name}
-						label={item.label}
+						ingredientLabel={() => props.ingredientLabel(item.name)}
 						addIngredient={() => props.addIngredient(item.name)}
 						removeIngredient={() => props.removeIngredient(item.name)} 
 						disable={item.disable}

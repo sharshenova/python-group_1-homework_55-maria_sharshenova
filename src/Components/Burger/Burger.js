@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Bacon from './Bacon/Bacon';
 import Cheese from './Cheese/Cheese';
 import Meat from './Meat/Meat';

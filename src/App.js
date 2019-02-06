@@ -4,7 +4,6 @@ import Burger from './Components/Burger/Burger';
 import BurgerForm from './Components/BurgerForm/BurgerForm';
 
 
-
 const availableIngredients = [
   {name: 'salad', price: 5, label: 'Салат'},
   {name: 'cheese', price: 20, label: 'Сыр'},
@@ -17,10 +16,10 @@ const basePrice = 20;
 class App extends Component {
   state = {
     ingredients: [
-      {name: 'salad', count: 0, total: 0, disable: true, label: 'Салат'},
-      {name: 'cheese', count: 0, total: 0, disable: true, label: 'Сыр'},
-      {name: 'meat', count: 0, total: 0, disable: true, label: 'Мясо'},
-      {name: 'bacon', count: 0, total: 0, disable: true, label: 'Бекон'}
+      {name: 'salad', count: 0, total: 0, disable: true},
+      {name: 'cheese', count: 0, total: 0, disable: true},
+      {name: 'meat', count: 0, total: 0, disable: true},
+      {name: 'bacon', count: 0, total: 0, disable: true}
     ],
     totalPrice: basePrice
   };
@@ -55,12 +54,18 @@ class App extends Component {
     this.setState(state);
   }
 
+  ingredientLabel = (name) => {
+    let label = availableIngredients.find(item => item.name === name).label;
+    console.log(label);
+    return label;
+  }
+
 
 render() {
         return (
             <div className="App">
                 <Burger ingredients={this.state.ingredients}/>
-                <BurgerForm removeIngredient={this.removeIngredient} addIngredient={this.addIngredient} totalPrice={this.state.totalPrice} ingredients={this.state.ingredients} />
+                <BurgerForm ingredientLabel={this.ingredientLabel} removeIngredient={this.removeIngredient} addIngredient={this.addIngredient} totalPrice={this.state.totalPrice} ingredients={this.state.ingredients} />
           
                 {/* здесь вывести панель с общей ценой */}
                     {/* для подсчёта цены можно добавить метод в App.js */}
