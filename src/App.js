@@ -33,30 +33,38 @@ class App extends Component {
     this.updateIngredient(name, -1);
   };
 
+  // функция, отвечающая за добавление или удаление ингредиента
+  // в зависимости от переданного модификатора (1 или -1 соответственно)
   updateIngredient = (name, modifier) => {
+    
     // find - метод массива, который работает аналогично findIndex,
-    // но находит не индекс элемента в массиве,
-    // а возвращает сам элемент.
+    // но находит не индекс элемента в массиве, а возвращает сам элемент
     let price = availableIngredients.find(item => item.name === name).price;
 
-    // скопировать состояние (state) компонента App.js
+    // копируем состояние (state) компонента App.js
     let state = {...this.state};
 
+    // находим нужный ингредиент по имени в скопированном "state"
     let ingredient = state.ingredients.find(item => item.name === name);
 
+    // увеличиваем/уменьшаем количество игредиента на 1 
     ingredient.count += modifier;
+    // задаем ingredient.disable=True, когда количество игредиента становится < 1
     ingredient.disable = ingredient.count < 1;
+    // находим стоимость ингредиента
     ingredient.total = ingredient.count * price;
 
+    // вычисляем стоимость бургера: базовая цена +
+    // сумма всех значений "total" в state.ingredients:
     state.totalPrice = basePrice + state.ingredients.reduce((sum, item) => sum + item.total, 0);
 
-    // задать новый state с перерисовкой компонентов на странице
+    // задаем новый state с перерисовкой компонентов на странице:
     this.setState(state);
   }
 
+  // возврашаем label ингредиента из const availableIngredients
   ingredientLabel = (name) => {
     let label = availableIngredients.find(item => item.name === name).label;
-    console.log(label);
     return label;
   }
 
@@ -66,18 +74,9 @@ render() {
             <div className="App">
                 <Burger ingredients={this.state.ingredients}/>
                 <BurgerForm ingredientLabel={this.ingredientLabel} removeIngredient={this.removeIngredient} addIngredient={this.addIngredient} totalPrice={this.state.totalPrice} ingredients={this.state.ingredients} />
-          
-                {/* здесь вывести панель с общей ценой */}
-                    {/* для подсчёта цены можно добавить метод в App.js */}
-                    {/* и вызвать его в фигурных скобках в JSX, */}
-                    {/* чтобы получить и вывести результат. */}
-                {/* под ценой вывести форму BurgerForm */}
-                    {/* в форме вывести IngredientControl для каждого ингредиента */}
             </div>
         );
     }
-
-
 };
 
 
