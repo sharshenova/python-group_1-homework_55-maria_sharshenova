@@ -18,7 +18,7 @@ function Burger(props) {
 
   // возвращаем разметку с заданными компоненами бургера:
   // <Salad/>, <Meat/>, <Cheese/>, <Bacon/> в нужном количестве
-  return <div className="Burger">
+  return <div className="Burger mt-3">
         <div className="BreadTop">
           <div className="Seeds1"/>
           <div className="Seeds2"/>

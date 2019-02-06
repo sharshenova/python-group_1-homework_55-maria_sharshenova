@@ -1,5 +1,16 @@
 .BurgerForm {
-	width: 500px;
-	margin: 0 auto;
-	background-color: #989898;
+	width: 20%;
+    min-width: 300px;
+    background-color: #a70a0a;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 40px auto;
+    padding: 20px 0;
+}
+
+.Price {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
 }

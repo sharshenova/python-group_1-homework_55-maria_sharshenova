@@ -2,15 +2,12 @@ import React from 'react';
 import IngredientControl from './IngredientControl/IngredientControl';
 import './BurgerForm.css';
 
-//BuildControl=IngreddientControl
-//buildControls=BurgerForm
 
 const BurgerForm = (props) => {
 
-
 	return (
 		<div className='BurgerForm'>
-			<p className='price'>Current Price: {props.totalPrice + ' $'}</p>
+			<p className='Price'>Current Price: {props.totalPrice + ' KGS'}</p>
 			<div>
 				{props.ingredients.map(item =>
 					<IngredientControl

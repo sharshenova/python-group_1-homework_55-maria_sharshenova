@@ -1,6 +1,59 @@
 .IngredientControl {
-	width: 400px;
-	text-align: center;
-	margin: 0 auto;
-	overflow:hidden;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0;
+    
+}
+
+.IngredientControl button{
+    padding: 5px;
+    margin: 0 3px;
+    width: 70px;
+    border: 1px solid #AA6817;
+    cursor: pointer;
+    outline: none;
+}
+
+.IngredientControl button:disabled {
+    background-color: #26746fs;
+    border: 1px solid #09857d;
+    color: black;
+    cursor: default;
+}
+
+.IngredientControl button:hover:disabled {
+    cursor: not-allowed;
+}
+
+.Label {
+    padding: 10px;
+    font-weight: bold;
+    width: 100px;
+    color: white;
+}
+
+.IngredientControl .Less {  
+    background-color: #329993;
+    color: #2a2a2a;
+    font-weight: bold;
+    border: 1px solid #09857d;
+}
+
+.IngredientControl .More {
+    background-color: #ebee0f;
+    color: #a70a0a;
+    font-weight: bold;
+    border: 1px solid #fcff00;
+}
+
+.IngredientControl .Less:hover, .IngredientControl .Less:active {  
+    background-color: #0b7d76;
+    color: white;
+}
+
+.IngredientControl .More:hover,.IngredientControl .More:active {
+    background-color: #3f9b07;
+    color: white;
+
 }
