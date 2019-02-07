@@ -5,10 +5,10 @@ import BurgerForm from './Components/BurgerForm/BurgerForm';
 
 
 const availableIngredients = [
-  {name: 'salad', price: 5, label: 'Салат'},
-  {name: 'cheese', price: 20, label: 'Сыр'},
-  {name: 'meat', price: 30, label: 'Мясо'},
-  {name: 'bacon', price: 20, label: 'Бекон'}
+  {name: 'salad', price: 5, label: 'Salad'},
+  {name: 'cheese', price: 20, label: 'Cheese'},
+  {name: 'meat', price: 30, label: 'Meat'},
+  {name: 'bacon', price: 20, label: 'Bacon'}
 ];
 
 const basePrice = 20;
@@ -49,13 +49,16 @@ class App extends Component {
 
     // увеличиваем/уменьшаем количество игредиента на 1 
     ingredient.count += modifier;
-    // задаем ingredient.disable=True, когда количество игредиента становится < 1
+    // задаем ingredient.disable=True, когда количество игредиента < 1
+    // ingredient.disable=False, когда количество игредиента >= 1
     ingredient.disable = ingredient.count < 1;
     // находим стоимость ингредиента
     ingredient.total = ingredient.count * price;
 
     // вычисляем стоимость бургера: базовая цена +
-    // сумма всех значений "total" в state.ingredients:
+    // сумма всех значений "total" в массиве state.ingredients
+    // reduce() выполняет функцию callback один раз для каждого элемента в массиве
+    // 0 - начальное значение (обязательно указывать в массиве объектов)
     state.totalPrice = basePrice + state.ingredients.reduce((sum, item) => sum + item.total, 0);
 
     // задаем новый state с перерисовкой компонентов на странице:
